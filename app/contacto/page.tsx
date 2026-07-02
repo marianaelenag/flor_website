@@ -3,22 +3,18 @@
 /*
  * CONTACTO page
  *
+ * Content loaded from content/contacto/index.json (managed via Tina CMS admin).
  * Full-bleed background photo behind everything.
  * Two-column layout within max-w-[1200px]:
  *   Left  — transparent spacer (photo shows through).
- *   Right — satin-linen container (mirrors Conóceme right column),
- *           52px padding, form centred vertically.
- *
- * Form spacing best practices:
- *   label → input : mb-1 (4px) — tight coupling so they read as one unit
- *   field → field : gap-5 (20px) — clear separation without being loose
- *   fields → button: mt-8 (32px) — visible section break before the action
+ *   Right — satin-linen container, 52px padding, form centred vertically.
  *
  * Form submission: wire up to Resend / Formspree in Step 6.
- * TODO (Tina CMS): backgroundImage { src, alt }
  */
 
 import { useState } from "react";
+import Image from "next/image";
+import contactoData from "@/content/contacto/index.json";
 
 /* ─── Shared input classes ───────────────────────────────────── */
 const inputBase =
@@ -31,6 +27,7 @@ const labelBase = "block font-body text-[12px] text-[#313534]/60 uppercase track
 
 /* ─── Page ───────────────────────────────────────────────────── */
 export default function Contacto() {
+  const { backgroundSrc, backgroundAlt } = contactoData;
   const [form, setForm]     = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
@@ -51,8 +48,16 @@ export default function Contacto() {
 
       {/* ── Full-bleed background photo ── */}
       <div className="absolute inset-0 bg-[#313534]">
-        {/* TODO (Tina CMS): swap for <Image fill> with backgroundImage field */}
-        <div className="absolute inset-0 bg-[#4a4542]" />
+        {backgroundSrc ? (
+          <Image
+            src={backgroundSrc}
+            alt={backgroundAlt}
+            fill
+            className="object-cover object-center"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[#4a4542]" />
+        )}
       </div>
 
       {/* ── Two-column layout ── */}
@@ -61,7 +66,7 @@ export default function Contacto() {
         {/* Left — transparent spacer, photo shows through */}
         <div className="flex-1" />
 
-        {/* Right — satin-linen container, mirrors Conóceme right column */}
+        {/* Right — satin-linen container */}
         <div className="flex-1 bg-[#ece8df] p-[52px] flex flex-col justify-center">
 
           {status === "sent" ? (
@@ -84,9 +89,7 @@ export default function Contacto() {
 
                 {/* Name */}
                 <div>
-                  <label htmlFor="name" className={labelBase}>
-                    Nombre
-                  </label>
+                  <label htmlFor="name" className={labelBase}>Nombre</label>
                   <input
                     id="name"
                     type="text"
@@ -101,9 +104,7 @@ export default function Contacto() {
 
                 {/* Email */}
                 <div>
-                  <label htmlFor="email" className={labelBase}>
-                    Email
-                  </label>
+                  <label htmlFor="email" className={labelBase}>Email</label>
                   <input
                     id="email"
                     type="email"
@@ -118,9 +119,7 @@ export default function Contacto() {
 
                 {/* Message */}
                 <div>
-                  <label htmlFor="message" className={labelBase}>
-                    Mensaje
-                  </label>
+                  <label htmlFor="message" className={labelBase}>Mensaje</label>
                   <textarea
                     id="message"
                     name="message"
@@ -133,7 +132,7 @@ export default function Contacto() {
                   />
                 </div>
 
-                {/* Submit — mt-8 (32px) separates it from the fields */}
+                {/* Submit */}
                 <div className="mt-8 flex justify-end">
                   <button
                     type="submit"

@@ -3,35 +3,30 @@
 /*
  * GALERÍA page
  *
- * Flexible auto-fill grid of square photo containers, gap-5 (same as Videobook).
+ * Content loaded from content/galeria/index.json (managed via Tina CMS admin).
+ * Flexible auto-fill grid of square photo containers, gap-5.
  * Click any photo to open it in a full-screen carousel lightbox.
  * Keyboard: ← → to navigate, Esc to close.
- *
- * TODO (Tina CMS): photos [{ src, alt }]
  */
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-
-/* ─── Placeholder data (will come from Tina CMS) ─────────────── */
-const photos = Array.from({ length: 9 }, (_, i) => ({
-  src: "",
-  alt: `Foto ${i + 1}`,
-}));
+import galeriaData from "@/content/galeria/index.json";
 
 /* ─── Page ───────────────────────────────────────────────────── */
 export default function Galeria() {
+  const photos = galeriaData.photos as { src: string; alt: string }[];
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const close = useCallback(() => setLightbox(null), []);
 
   const prev = useCallback(() =>
     setLightbox((i) => (i !== null ? (i - 1 + photos.length) % photos.length : null)),
-  []);
+  [photos.length]);
 
   const next = useCallback(() =>
     setLightbox((i) => (i !== null ? (i + 1) % photos.length : null)),
-  []);
+  [photos.length]);
 
   /* Keyboard navigation */
   useEffect(() => {

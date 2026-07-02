@@ -1,37 +1,13 @@
 /*
  * VIDEOBOOK page
- * Figma ref: "MacBook Pro 16" - 1"
  *
+ * Content loaded from content/videobook/index.json (managed via Tina CMS admin).
  * Dark radial-gradient background (full bleed).
  * Content capped at max-w-[1200px], centred.
- * Featured video (top) + 3×2 grid of smaller videos, gap-5 (20px ≈ 20pt).
- *
- * TODO (Tina CMS): featuredVideo { url, title, date }, videoGrid [{ url, title, date }]
+ * Featured video (top) + grid of smaller videos, gap-5 (20px).
  */
 
-/* ─── Types ─────────────────────────────────────────────────── */
-interface VideoItem {
-  title: string;
-  date: string;
-  /** Vimeo or YouTube embed URL */
-  embedUrl?: string;
-}
-
-/* ─── Placeholder data (will come from Tina CMS) ─────────────── */
-const featured: VideoItem = {
-  title: "Diatriba del parque",
-  date: "Fecha de grabación",
-  embedUrl: "",
-};
-
-const grid: VideoItem[] = [
-  { title: "Diatriba del parque", date: "Fecha de grabación" },
-  { title: "Fleabag scene",       date: "Fecha de grabación" },
-  { title: "Girls scene",         date: "Fecha de grabación" },
-  { title: "",                    date: "" },
-  { title: "",                    date: "" },
-  { title: "",                    date: "" },
-];
+import videobookData from "@/content/videobook/index.json";
 
 /* ─── Sub-components ─────────────────────────────────────────── */
 function VideoPlaceholder({ className = "" }: { className?: string }) {
@@ -46,6 +22,8 @@ function VideoPlaceholder({ className = "" }: { className?: string }) {
 
 /* ─── Page ───────────────────────────────────────────────────── */
 export default function Videobook() {
+  const { featured, grid } = videobookData;
+
   return (
     <main
       className="flex-1 min-h-screen"
@@ -69,18 +47,31 @@ export default function Videobook() {
           ) : (
             <VideoPlaceholder className="w-full aspect-video" />
           )}
+          {featured.title && (
+            <div className="mt-3 text-[#ece8df]">
+              <p className="font-body font-semibold text-[24px] leading-tight">{featured.title}</p>
+              <p className="font-body text-[14px] opacity-60">{featured.date}</p>
+            </div>
+          )}
         </section>
 
-        {/* ── Video grid — 3 columns, gap-5 (20px) both axes ── */}
+        {/* ── Video grid — 3 columns, gap-5 (20px) ── */}
         <section className="grid grid-cols-3 gap-5">
           {grid.map((v, i) => (
             <div key={i}>
-              <VideoPlaceholder className="w-full aspect-video" />
+              {v.embedUrl ? (
+                <iframe
+                  src={v.embedUrl}
+                  className="w-full aspect-video rounded-sm"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                />
+              ) : (
+                <VideoPlaceholder className="w-full aspect-video" />
+              )}
               {v.title && (
                 <div className="mt-3 text-[#ece8df]">
-                  <p className="font-body font-semibold text-[24px] leading-tight">
-                    {v.title}
-                  </p>
+                  <p className="font-body font-semibold text-[24px] leading-tight">{v.title}</p>
                   <p className="font-body text-[14px] opacity-60">{v.date}</p>
                 </div>
               )}

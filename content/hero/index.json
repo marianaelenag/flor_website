@@ -1,0 +1,11 @@
+{
+  "quote": "Aunque estoy entrenada y siempre resucito\nhe decidido no morirme nunca más",
+  "quoteAttribution": "G.F.",
+  "slides": [
+    { "bg": "#2a1a0e", "textColor": "#c6ba9f", "image": "" },
+    { "bg": "#313534", "textColor": "#e5e6e6", "image": "" },
+    { "bg": "#1e1a16", "textColor": "#c6ba9f", "image": "" },
+    { "bg": "#252b2a", "textColor": "#e5e6e6", "image": "" },
+    { "bg": "#2d1f1a", "textColor": "#c6ba9f", "image": "" }
+  ]
+}

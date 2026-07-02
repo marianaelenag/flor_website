@@ -1,0 +1,50 @@
+fragment HeroParts on Hero {
+  __typename
+  quote
+  quoteAttribution
+  slides {
+    __typename
+    bg
+    textColor
+    image
+  }
+}
+
+fragment VideobookParts on Videobook {
+  __typename
+  featured {
+    __typename
+    embedUrl
+    title
+    date
+  }
+  grid {
+    __typename
+    embedUrl
+    title
+    date
+  }
+}
+
+fragment GaleriaParts on Galeria {
+  __typename
+  photos {
+    __typename
+    src
+    alt
+  }
+}
+
+fragment ConocemeParts on Conoceme {
+  __typename
+  portraitSrc
+  portraitAlt
+  heading
+  bio
+}
+
+fragment ContactoParts on Contacto {
+  __typename
+  backgroundSrc
+  backgroundAlt
+}

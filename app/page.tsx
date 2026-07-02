@@ -3,38 +3,36 @@
 /*
  * HOME — Hero page with carousel
  *
- * Each slide has a `textColor` (coral-reef | black-haze) shared with
- * Navigation via HeroColorContext. The colour fades via CSS transition —
- * text stays fully visible at all times, only the colour property changes.
+ * Content is loaded from content/hero/index.json (managed via Tina CMS admin).
+ * Each slide drives background colour / photo + text colour.
+ * Quote and attribution are shared across all slides.
  *
- * TODO (Tina CMS): replace placeholder `bg` values with real slide images.
+ * Colour sync: textColor is shared with Navigation via HeroColorContext.
+ * Text stays fully visible at all times — only the CSS `color` property fades.
  */
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useHeroColor, type HeroColor } from "@/context/HeroColorContext";
+import heroData from "@/content/hero/index.json";
 
-/* ─── Slide definitions — extend with real images via Tina CMS ─ */
-const slides: { bg: string; textColor: HeroColor }[] = [
-  { bg: "#2a1a0e", textColor: "#c6ba9f" }, // slide 1 — warm dark brown
-  { bg: "#313534", textColor: "#e5e6e6" }, // slide 2 — cool dark grey
-  { bg: "#1e1a16", textColor: "#c6ba9f" }, // slide 3 — deep warm dark
-  { bg: "#252b2a", textColor: "#e5e6e6" }, // slide 4 — dark teal-grey
-  { bg: "#2d1f1a", textColor: "#c6ba9f" }, // slide 5 — deep brown
-];
-
-const SLIDE_DURATION = 4000; // ms between auto-advances
+const SLIDE_DURATION = 4000;
 const COLOR_TRANSITION = "color 700ms ease";
 
 export default function Home() {
   const [current, setCurrent] = useState(0);
   const { color: textColor, setColor } = useHeroColor();
 
+  const slides = heroData.slides as { bg: string; textColor: HeroColor; image?: string }[];
+  const { quote, quoteAttribution } = heroData;
+
   /* Sync nav colour on first render */
   useEffect(() => {
     setColor(slides[0].textColor);
-  }, [setColor]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  /* Auto-advance — no opacity manipulation, colour transition only */
+  /* Auto-advance — colour transition only, no opacity tricks */
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => {
@@ -43,11 +41,10 @@ export default function Home() {
         return next;
       });
     }, SLIDE_DURATION);
-
     return () => clearInterval(timer);
-  }, [setColor]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  /* Manual jump — same: just update index + colour, CSS does the rest */
   function goTo(i: number) {
     setCurrent(i);
     setColor(slides[i].textColor);
@@ -58,11 +55,20 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden">
 
-      {/* ── Background (placeholder colours — swap for <Image> via Tina) ── */}
+      {/* ── Background: photo if set, otherwise colour swatch ── */}
       <div
         className="absolute inset-0 transition-colors duration-700"
         style={{ backgroundColor: slide.bg }}
       >
+        {slide.image && (
+          <Image
+            src={slide.image}
+            alt=""
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        )}
         <div
           className="absolute inset-0"
           style={{
@@ -72,12 +78,12 @@ export default function Home() {
         />
       </div>
 
-      {/* ── Hero text — always fully visible, only colour transitions ── */}
+      {/* ── Hero text ── */}
       <div
         className="absolute bottom-[134px] left-[124px]"
         style={{ color: textColor, transition: COLOR_TRANSITION }}
       >
-        {/* Name — line-height 0.8 */}
+        {/* Name */}
         <p
           className="font-display text-[160px] uppercase"
           style={{ lineHeight: 0.8 }}
@@ -91,20 +97,19 @@ export default function Home() {
           Romero
         </p>
 
-        {/* Quote — line-height 1.2 */}
+        {/* Quote — line-height 1.2, whitespace preserved for line breaks */}
         <div
-          className="mt-6 font-body text-[24px] tracking-[-0.04em]"
+          className="mt-6 font-body text-[24px] tracking-[-0.04em] whitespace-pre-line"
           style={{ lineHeight: 1.2 }}
         >
-          <p>&ldquo;Aunque estoy entrenada y siempre resucito</p>
-          <p>
-            he decidido no morirme nunca más&rdquo;{" "}
-            <span className="text-[16px] tracking-[-0.04em]">| G.F.</span>
-          </p>
+          <span>&ldquo;{quote}&rdquo;</span>
+          {quoteAttribution && (
+            <span className="text-[16px] tracking-[-0.04em]"> | {quoteAttribution}</span>
+          )}
         </div>
       </div>
 
-      {/* ── Slide indicators — colour also transitions ── */}
+      {/* ── Slide indicators ── */}
       <div className="absolute bottom-8 left-[124px] flex gap-2">
         {slides.map((s, i) => (
           <button
