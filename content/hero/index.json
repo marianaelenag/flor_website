@@ -3,14 +3,14 @@
   "quoteAttribution": "G.F.",
   "slides": [
     {
-      "bg": "#2a1a0e",
-      "textColor": "#c6ba9f",
-      "image": "/uploads/DSCF3551.jpg"
-    },
-    {
       "bg": "#313534",
       "textColor": "#e5e6e6",
       "image": "/uploads/DSCF3701.jpg"
+    },
+    {
+      "bg": "#2a1a0e",
+      "textColor": "#c6ba9f",
+      "image": "/uploads/DSCF3551.jpg"
     },
     {
       "bg": "#1e1a16",
@@ -20,7 +20,7 @@
     {
       "bg": "#252b2a",
       "textColor": "#e5e6e6",
-      "image": ""
+      "image": "/uploads/Còpia de 3C4A0585.jpg"
     },
     {
       "bg": "#2d1f1a",
