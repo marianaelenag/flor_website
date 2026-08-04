@@ -80,18 +80,18 @@ export default function Home() {
 
       {/* ── Hero text ── */}
       <div
-        className="absolute bottom-[134px] left-[124px]"
+        className="absolute bottom-16 left-5 sm:bottom-[134px] sm:left-[124px]"
         style={{ color: textColor, transition: COLOR_TRANSITION }}
       >
         {/* Name */}
         <p
-          className="font-display text-[160px] uppercase"
+          className="font-display text-[64px] sm:text-[120px] lg:text-[160px] uppercase"
           style={{ lineHeight: 0.8 }}
         >
           Florencia
         </p>
         <p
-          className="font-display text-[199px] uppercase"
+          className="font-display text-[80px] sm:text-[150px] lg:text-[199px] uppercase"
           style={{ lineHeight: 0.8 }}
         >
           Romero
@@ -99,18 +99,18 @@ export default function Home() {
 
         {/* Quote — line-height 1.2, whitespace preserved for line breaks */}
         <div
-          className="mt-6 font-body text-[24px] tracking-[-0.04em] whitespace-pre-line"
+          className="mt-4 sm:mt-6 font-body text-[13px] sm:text-[24px] tracking-[-0.04em] whitespace-pre-line"
           style={{ lineHeight: 1.2 }}
         >
           <span>&ldquo;{quote}&rdquo;</span>
           {quoteAttribution && (
-            <span className="text-[16px] tracking-[-0.04em]"> | {quoteAttribution}</span>
+            <span className="text-[11px] sm:text-[16px] tracking-[-0.04em]"> | {quoteAttribution}</span>
           )}
         </div>
       </div>
 
       {/* ── Slide indicators ── */}
-      <div className="absolute bottom-8 left-[124px] flex gap-2">
+      <div className="absolute bottom-4 left-5 sm:bottom-8 sm:left-[124px] flex gap-2">
         {slides.map((s, i) => (
           <button
             key={i}

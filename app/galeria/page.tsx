@@ -41,7 +41,7 @@ export default function Galeria() {
   }, [lightbox, close, prev, next]);
 
   return (
-    <main className="min-h-screen bg-[#ece8df] pt-[200px] pb-[80px]">
+    <main className="min-h-screen bg-[#ece8df] pt-[110px] sm:pt-[200px] pb-[80px]">
 
       {/* ── Photo grid ── */}
       <div className="max-w-[1200px] mx-auto w-full px-6">
@@ -83,7 +83,7 @@ export default function Galeria() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Image area */}
-            <div className="w-[80vw] h-[80vh] relative flex items-center justify-center">
+            <div className="w-[92vw] h-[75vh] sm:w-[80vw] sm:h-[80vh] relative flex items-center justify-center">
               {photos[lightbox].src ? (
                 <Image
                   src={photos[lightbox].src}
@@ -94,25 +94,25 @@ export default function Galeria() {
               ) : (
                 <div className="w-full h-full bg-[#555]" />
               )}
+
+              {/* Prev — inside image on mobile, outside on md+ */}
+              <button
+                onClick={prev}
+                aria-label="Anterior"
+                className="absolute left-2 md:left-[-56px] top-1/2 -translate-y-1/2 text-[#ece8df]/60 hover:text-[#ece8df] font-display text-[36px] leading-none transition-colors"
+              >
+                ‹
+              </button>
+
+              {/* Next — inside image on mobile, outside on md+ */}
+              <button
+                onClick={next}
+                aria-label="Siguiente"
+                className="absolute right-2 md:right-[-56px] top-1/2 -translate-y-1/2 text-[#ece8df]/60 hover:text-[#ece8df] font-display text-[36px] leading-none transition-colors"
+              >
+                ›
+              </button>
             </div>
-
-            {/* Prev */}
-            <button
-              onClick={prev}
-              aria-label="Anterior"
-              className="absolute left-[-56px] top-1/2 -translate-y-1/2 text-[#ece8df]/60 hover:text-[#ece8df] font-display text-[36px] leading-none transition-colors"
-            >
-              ‹
-            </button>
-
-            {/* Next */}
-            <button
-              onClick={next}
-              aria-label="Siguiente"
-              className="absolute right-[-56px] top-1/2 -translate-y-1/2 text-[#ece8df]/60 hover:text-[#ece8df] font-display text-[36px] leading-none transition-colors"
-            >
-              ›
-            </button>
 
             {/* Close */}
             <button

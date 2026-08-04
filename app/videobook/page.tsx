@@ -61,7 +61,7 @@ export default function Videobook() {
       }}
     >
       {/* ── Centred content container ── */}
-      <div className="max-w-[1200px] mx-auto w-full pt-[200px] pb-[80px] px-6">
+      <div className="max-w-[1200px] mx-auto w-full pt-[110px] sm:pt-[200px] pb-[80px] px-6">
 
         {/* ── Featured video ── */}
         <section className="mb-10">
@@ -83,8 +83,8 @@ export default function Videobook() {
           )}
         </section>
 
-        {/* ── Video grid — 3 columns, gap-5 (20px) ── */}
-        <section className="grid grid-cols-3 gap-5">
+        {/* ── Video grid — 1 col mobile → 2 sm → 3 lg ── */}
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {grid.map((v, i) => (
             <div key={i}>
               {v.embedUrl ? (

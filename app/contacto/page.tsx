@@ -61,13 +61,13 @@ export default function Contacto() {
       </div>
 
       {/* ── Two-column layout ── */}
-      <div className="relative max-w-[1200px] mx-auto w-full min-h-screen flex gap-6 px-6 py-[200px]">
+      <div className="relative max-w-[1200px] mx-auto w-full min-h-screen flex flex-col md:flex-row gap-6 px-4 md:px-6 py-[110px] md:py-[200px]">
 
-        {/* Left — transparent spacer, photo shows through */}
-        <div className="flex-1" />
+        {/* Left — transparent spacer (hidden on mobile) */}
+        <div className="hidden md:block md:flex-1" />
 
         {/* Right — satin-linen container */}
-        <div className="flex-1 bg-[#ece8df] p-[52px] flex flex-col justify-center">
+        <div className="w-full md:flex-1 bg-[#ece8df] p-6 sm:p-[52px] flex flex-col justify-center">
 
           {status === "sent" ? (
             <div className="flex flex-col items-center text-center gap-4">

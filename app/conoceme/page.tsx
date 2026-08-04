@@ -16,12 +16,12 @@ export default function Conoceme() {
   const { portraitSrc, portraitAlt, heading, bio } = conocemeData;
 
   return (
-    <main className="min-h-screen bg-[#e5e6e6] pt-[120px] pb-24">
+    <main className="min-h-screen bg-[#e5e6e6] pt-[90px] sm:pt-[120px] pb-24">
 
-      <div className="min-h-[calc(100vh-316px)] w-full max-w-[1200px] mx-auto mt-20 flex gap-6">
+      <div className="w-full max-w-[1200px] mx-auto mt-6 sm:mt-20 flex flex-col md:flex-row gap-6 px-4 md:px-0">
 
-        {/* ── Left column: portrait photo ── */}
-        <div className="flex-1 relative overflow-hidden">
+        {/* ── Portrait photo ── */}
+        <div className="w-full h-[60vw] min-h-[260px] md:h-auto md:flex-1 relative overflow-hidden">
           {portraitSrc ? (
             <Image
               src={portraitSrc}
@@ -34,8 +34,8 @@ export default function Conoceme() {
           )}
         </div>
 
-        {/* ── Right column: satin-linen, 52px padding, centred content ── */}
-        <div className="flex-1 bg-[#ece8df] p-[52px] flex items-center justify-center">
+        {/* ── Text panel: satin-linen ── */}
+        <div className="w-full md:flex-1 bg-[#ece8df] p-6 sm:p-[52px] flex items-center justify-center pb-10 md:pb-[52px]">
           <div className="flex flex-col items-center text-center max-w-[540px]">
 
             <h1 className="font-display text-[20px] text-[#313534] uppercase leading-tight">

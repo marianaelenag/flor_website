@@ -9,7 +9,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="h-[60px] bg-[#313534] flex items-center justify-between px-[60px] shrink-0">
+    <footer className="h-[60px] bg-[#313534] flex items-center justify-between px-4 sm:px-[60px] shrink-0">
 
       <p className="font-body text-[12px] text-[#ece8df]/50">
         © {year} Florencia Romero
