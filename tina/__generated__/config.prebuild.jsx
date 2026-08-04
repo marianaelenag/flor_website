@@ -85,7 +85,10 @@ var config_default = defineConfig({
               {
                 type: "string",
                 name: "embedUrl",
-                label: "URL embed (Vimeo / YouTube)"
+                label: "URL del video (Vimeo / YouTube)",
+                ui: {
+                  description: "Pega cualquier URL de YouTube o Vimeo (la de la barra del navegador). El sitio la convierte autom\xE1ticamente."
+                }
               },
               { type: "string", name: "title", label: "T\xEDtulo" },
               { type: "string", name: "date", label: "Fecha" }
@@ -103,7 +106,10 @@ var config_default = defineConfig({
               {
                 type: "string",
                 name: "embedUrl",
-                label: "URL embed (Vimeo / YouTube)"
+                label: "URL del video (Vimeo / YouTube)",
+                ui: {
+                  description: "Pega cualquier URL de YouTube o Vimeo (la de la barra del navegador). El sitio la convierte autom\xE1ticamente."
+                }
               },
               { type: "string", name: "title", label: "T\xEDtulo" },
               { type: "string", name: "date", label: "Fecha" }
