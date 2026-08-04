@@ -9,6 +9,34 @@
 
 import videobookData from "@/content/videobook/index.json";
 
+/* ─── URL normaliser ─────────────────────────────────────────── */
+/**
+ * Converts any YouTube or Vimeo URL into its embed form.
+ * Accepts: watch URLs, short URLs (youtu.be), share URLs, and already-embed URLs.
+ * Returns the original string unchanged if it doesn't match.
+ */
+function toEmbedUrl(url: string): string {
+  if (!url) return url;
+
+  // ── YouTube ──────────────────────────────────────────────────
+  // https://www.youtube.com/watch?v=ID&...
+  // https://youtu.be/ID
+  // https://www.youtube.com/shorts/ID
+  const ytWatch = url.match(
+    /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+  );
+  if (ytWatch) return `https://www.youtube.com/embed/${ytWatch[1]}`;
+
+  // ── Vimeo ────────────────────────────────────────────────────
+  // https://vimeo.com/ID  or  https://vimeo.com/channels/*/ID
+  const vimeo = url.match(/vimeo\.com\/(?:.*\/)?(\d+)/);
+  if (vimeo && !url.includes("player.vimeo.com")) {
+    return `https://player.vimeo.com/video/${vimeo[1]}`;
+  }
+
+  return url; // already an embed URL or unknown platform — pass through
+}
+
 /* ─── Sub-components ─────────────────────────────────────────── */
 function VideoPlaceholder({ className = "" }: { className?: string }) {
   return (
@@ -39,7 +67,7 @@ export default function Videobook() {
         <section className="mb-10">
           {featured.embedUrl ? (
             <iframe
-              src={featured.embedUrl}
+              src={toEmbedUrl(featured.embedUrl)}
               className="w-full aspect-video rounded-sm"
               allow="autoplay; fullscreen"
               allowFullScreen
@@ -61,7 +89,7 @@ export default function Videobook() {
             <div key={i}>
               {v.embedUrl ? (
                 <iframe
-                  src={v.embedUrl}
+                  src={toEmbedUrl(v.embedUrl)}
                   className="w-full aspect-video rounded-sm"
                   allow="autoplay; fullscreen"
                   allowFullScreen
