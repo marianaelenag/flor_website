@@ -53,20 +53,20 @@
       "alt": "Galeria 11"
     },
     {
-      "src": "/uploads/Galeri%CC%81a_foto12.jpg",
-      "alt": "Galeria_blanco2"
-    },
-    {
       "src": "/uploads/Galeria_foto13.JPG",
       "alt": "Galeria 13"
     },
     {
-      "src": "/uploads/Galeri%CC%81a_foto14.JPG",
-      "alt": "Galeria 14"
-    },
-    {
       "src": "/uploads/Galeria_BN3.JPG",
       "alt": "Galeria_blanco1"
+    },
+    {
+      "src": "/uploads/Galeri%CC%81a_foto12.jpg",
+      "alt": "Galeria_blanco2"
+    },
+    {
+      "src": "/uploads/Galeri%CC%81a_foto14.JPG",
+      "alt": "Galeria_blanco3"
     }
   ]
 }
