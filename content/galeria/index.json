@@ -53,8 +53,12 @@
       "alt": "Galeria_traje1"
     },
     {
-      "src": "/uploads/Galeria_foto13.JPG",
+      "src": "/uploads/Galeria_traje2.JPG",
       "alt": "Galeria_traje2"
+    },
+    {
+      "src": "/uploads/Galeria_foto13.JPG",
+      "alt": "Galeria_traje3"
     },
     {
       "src": "/uploads/Galeria_foto4.jpg",
@@ -75,10 +79,6 @@
     {
       "src": "/uploads/Galeri%CC%81a_foto14.JPG",
       "alt": "Galeria_blanco3"
-    },
-    {
-      "src": "/uploads/Galeria_traje2.JPG",
-      "alt": "Galeria_traje2"
     }
   ]
 }
