@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Koulen, Krub } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import MobileNav from "@/components/MobileNav";
 import Footer from "@/components/Footer";
 import { Providers } from "./providers";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body className="h-full flex flex-col">
         <Providers>
           <Navigation />
+          <MobileNav />
           <div className="flex-1 flex flex-col">
             {children}
           </div>

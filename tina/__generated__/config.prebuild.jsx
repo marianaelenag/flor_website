@@ -148,6 +148,7 @@ var config_default = defineConfig({
         format: "json",
         ui: { allowedActions: { create: false, delete: false } },
         fields: [
+          /* ── Portrait ── */
           {
             type: "image",
             name: "portraitSrc",
@@ -158,16 +159,81 @@ var config_default = defineConfig({
             name: "portraitAlt",
             label: "Alt text de la foto"
           },
+          /* ── CV sections (Teatro, Formación, etc.) ── */
+          {
+            type: "object",
+            name: "cvSections",
+            label: "Secciones CV",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.title ?? "Secci\xF3n"
+              }),
+              description: "A\xF1ade tantas secciones como necesites (Teatro, Formaci\xF3n, Cortometrajes\u2026). Cada entrada admite saltos de l\xEDnea."
+            },
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "T\xEDtulo de la secci\xF3n"
+              },
+              {
+                type: "object",
+                name: "items",
+                label: "Entradas",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: (item?.text ?? "").split("\n")[0] || "Entrada"
+                  })
+                },
+                fields: [
+                  {
+                    type: "string",
+                    name: "text",
+                    label: "Texto (usa Enter para nuevas l\xEDneas dentro de la misma entrada)",
+                    ui: { component: "textarea" }
+                  }
+                ]
+              }
+            ]
+          },
+          /* ── Idiomas (one-liner list) ── */
+          {
+            type: "object",
+            name: "idiomas",
+            label: "Idiomas",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "T\xEDtulo"
+              },
+              {
+                type: "string",
+                name: "items",
+                label: "Idiomas (uno por entrada)",
+                list: true,
+                ui: {
+                  description: "Escribe cada idioma por separado, p. ej. \xABEspa\xF1ol \u2022 Nativo\xBB"
+                }
+              }
+            ]
+          },
+          /* ── Bio (two-column on frontend, single textarea here) ── */
           {
             type: "string",
-            name: "heading",
-            label: "T\xEDtulo"
+            name: "bioHeading",
+            label: "T\xEDtulo del bio"
           },
           {
             type: "string",
             name: "bio",
-            label: "Biograf\xEDa",
-            ui: { component: "textarea" }
+            label: "Biograf\xEDa (el texto se divide en dos columnas autom\xE1ticamente)",
+            ui: {
+              component: "textarea",
+              description: "Escribe el texto corrido. El sitio lo divide en dos columnas igual. Usa l\xEDneas en blanco para separar p\xE1rrafos."
+            }
           }
         ]
       },

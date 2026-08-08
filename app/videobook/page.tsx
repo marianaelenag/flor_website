@@ -68,12 +68,12 @@ export default function Videobook() {
           {featured.embedUrl ? (
             <iframe
               src={toEmbedUrl(featured.embedUrl)}
-              className="w-full aspect-video rounded-sm"
+              className="w-full aspect-video rounded-[8px]"
               allow="autoplay; fullscreen"
               allowFullScreen
             />
           ) : (
-            <VideoPlaceholder className="w-full aspect-video" />
+            <VideoPlaceholder className="w-full aspect-video rounded-[8px]" />
           )}
           {featured.title && (
             <div className="mt-3 text-[#ece8df]">
@@ -83,19 +83,19 @@ export default function Videobook() {
           )}
         </section>
 
-        {/* ── Video grid — 1 col mobile → 2 sm → 3 lg ── */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* ── Video grid — 1 col mobile → 2 col desktop (max 2) ── */}
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {grid.map((v, i) => (
             <div key={i}>
               {v.embedUrl ? (
                 <iframe
                   src={toEmbedUrl(v.embedUrl)}
-                  className="w-full aspect-video rounded-sm"
+                  className="w-full aspect-video rounded-[8px]"
                   allow="autoplay; fullscreen"
                   allowFullScreen
                 />
               ) : (
-                <VideoPlaceholder className="w-full aspect-video" />
+                <VideoPlaceholder className="w-full aspect-video rounded-[8px]" />
               )}
               {v.title && (
                 <div className="mt-3 text-[#ece8df]">

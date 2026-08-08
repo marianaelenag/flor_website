@@ -39,7 +39,20 @@ fragment ConocemeParts on Conoceme {
   __typename
   portraitSrc
   portraitAlt
-  heading
+  cvSections {
+    __typename
+    title
+    items {
+      __typename
+      text
+    }
+  }
+  idiomas {
+    __typename
+    title
+    items
+  }
+  bioHeading
   bio
 }
 

@@ -53,7 +53,7 @@ export default function Galeria() {
             <button
               key={i}
               onClick={() => setLightbox(i)}
-              className="aspect-square overflow-hidden focus:outline-none group relative"
+              className="aspect-square overflow-hidden rounded-[8px] focus:outline-none group relative"
               aria-label={photo.alt}
             >
               {photo.src ? (

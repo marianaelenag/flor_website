@@ -231,20 +231,52 @@ type GaleriaConnection implements Connection {
   edges: [GaleriaConnectionEdges]
 }
 
+type ConocemeCvSectionsItems {
+  text: String
+}
+
+type ConocemeCvSections {
+  title: String
+  items: [ConocemeCvSectionsItems]
+}
+
+type ConocemeIdiomas {
+  title: String
+  items: [String]
+}
+
 type Conoceme implements Node & Document {
   portraitSrc: String
   portraitAlt: String
-  heading: String
+  cvSections: [ConocemeCvSections]
+  idiomas: ConocemeIdiomas
+  bioHeading: String
   bio: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
+input ConocemeCvSectionsItemsFilter {
+  text: StringFilter
+}
+
+input ConocemeCvSectionsFilter {
+  title: StringFilter
+  items: ConocemeCvSectionsItemsFilter
+}
+
+input ConocemeIdiomasFilter {
+  title: StringFilter
+  items: StringFilter
+}
+
 input ConocemeFilter {
   portraitSrc: ImageFilter
   portraitAlt: StringFilter
-  heading: StringFilter
+  cvSections: ConocemeCvSectionsFilter
+  idiomas: ConocemeIdiomasFilter
+  bioHeading: StringFilter
   bio: StringFilter
 }
 
@@ -356,10 +388,26 @@ input GaleriaMutation {
   photos: [GaleriaPhotosMutation]
 }
 
+input ConocemeCvSectionsItemsMutation {
+  text: String
+}
+
+input ConocemeCvSectionsMutation {
+  title: String
+  items: [ConocemeCvSectionsItemsMutation]
+}
+
+input ConocemeIdiomasMutation {
+  title: String
+  items: [String]
+}
+
 input ConocemeMutation {
   portraitSrc: String
   portraitAlt: String
-  heading: String
+  cvSections: [ConocemeCvSectionsMutation]
+  idiomas: ConocemeIdiomasMutation
+  bioHeading: String
   bio: String
 }
 
