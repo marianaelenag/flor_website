@@ -154,7 +154,7 @@ export default function Contacto() {
               src={backgroundSrc}
               alt={backgroundAlt ?? ""}
               fill
-              className="object-cover"
+              className="object-cover overflow-visible"
               style={{ objectPosition: "40% center" }}
               priority
             />
