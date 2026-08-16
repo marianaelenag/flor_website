@@ -59,7 +59,7 @@ export default function Conoceme() {
                 alt={portraitAlt}
                 fill
                 className="object-cover"
-                style={{ objectPosition: "top right" }}
+                style={{ objectPosition: "top left" }}
                 priority
               />
             ) : (
@@ -81,7 +81,7 @@ export default function Conoceme() {
                     {section.items.map((item, ii) => (
                       <li
                         key={ii}
-                        className="font-body text-[12px] text-[#313534] leading-snug whitespace-pre-line"
+                        className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
                       >
                         {item.text}
                       </li>
