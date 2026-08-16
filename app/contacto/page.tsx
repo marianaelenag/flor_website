@@ -148,14 +148,20 @@ export default function Contacto() {
             Anchored to the right; the specific theatrical photo
             should have object-position: right so the subject is
             always visible regardless of container width. */}
-        <div className="w-full md:w-1/2 relative min-h-[50vw] md:min-h-0 overflow-visible bg-black">
+        {/* clip-path lets the image bleed past the right viewport edge
+            without triggering a horizontal scrollbar.
+            inset(top right bottom left): right is -9999px = no clip on that side. */}
+        <div
+          className="w-full md:w-1/2 relative min-h-[50vw] md:min-h-0 bg-black"
+          style={{ clipPath: "inset(0 -9999px 0 0)" }}
+        >
           {backgroundSrc ? (
             <Image
               src={backgroundSrc}
               alt={backgroundAlt ?? ""}
               fill
-              className="object-cover overflow-visible"
-              style={{ objectPosition: "40% center" }}
+              className="object-cover"
+              style={{ objectPosition: "left center" }}
               priority
             />
           ) : (
