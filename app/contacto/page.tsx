@@ -161,7 +161,7 @@ export default function Contacto() {
               alt={backgroundAlt ?? ""}
               fill
               className="object-cover overflow-visible"
-              style={{ objectPosition: "left center" }}
+              style={{ objectPosition: "40% center" }}
               priority
             />
           ) : (
