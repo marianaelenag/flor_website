@@ -14,13 +14,10 @@
       ]
     },
     {
-      "title": "Formación",
+      "title": "Largometrajes",
       "items": [
         {
-          "text": "- Nancy tuno 2027\n- Alejandro Giles 2026\n- ...\n"
-        },
-        {
-          "text": "Alejandro Giles 2026"
+          "text": "Formación y Entrenamiento con Alejandro Giles\n2026"
         }
       ]
     },
@@ -33,10 +30,13 @@
       ]
     },
     {
-      "title": "Colaboraciones",
+      "title": "Formación",
       "items": [
         {
-          "text": "Descripción de la colaboración\nAño"
+          "text": "- Nancy tuno 2027\n- Alejandro Giles 2026\n- ...\n"
+        },
+        {
+          "text": "Alejandro Giles 2026"
         }
       ]
     }
