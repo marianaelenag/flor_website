@@ -54,8 +54,11 @@ export default function Contacto() {
 
       {/* ══════════════════════════════════════════════════════════
           Desktop: side-by-side   Mobile: stacked (form then photo)
+          Wrapped at max-w-[1200px] so the form+photo pair reads as
+          one centered unit on wide viewports instead of the form
+          sitting flush against the left edge.
       ══════════════════════════════════════════════════════════ */}
-      <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="flex flex-col md:flex-row min-h-screen max-w-[1200px] mx-auto">
 
         {/* ── LEFT — black form wrapper ─────────────────────────
             Same colour as page bg, so on desktop the elements look
