@@ -49,7 +49,7 @@ export default function MobileNav() {
     <>
       {/* ── Fixed bar — white frosted-glass card ───────────────── */}
       <div className="fixed top-0 left-0 right-0 z-50 flex md:hidden px-4 pt-4">
-        <div className="w-full bg-white/75 backdrop-blur-sm rounded-[8px] flex items-center justify-between px-3 py-[10px]">
+        <div className="w-full bg-white/70 backdrop-blur-sm rounded-[8px] flex items-center justify-between px-3 py-[10px]">
 
           <Link
             href="/"
