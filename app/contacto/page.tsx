@@ -148,14 +148,14 @@ export default function Contacto() {
             Anchored to the right; the specific theatrical photo
             should have object-position: right so the subject is
             always visible regardless of container width. */}
-        <div className="w-full md:w-1/2 relative min-h-[50vw] md:min-h-0 overflow-hidden bg-black">
+        <div className="w-full md:w-1/2 relative min-h-[50vw] md:min-h-0 overflow-visible bg-black">
           {backgroundSrc ? (
             <Image
               src={backgroundSrc}
               alt={backgroundAlt ?? ""}
               fill
               className="object-cover"
-              style={{ objectPosition: "right center" }}
+              style={{ objectPosition: "40% center" }}
               priority
             />
           ) : (
