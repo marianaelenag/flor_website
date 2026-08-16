@@ -1,76 +1,75 @@
 "use client";
 
 /*
- * MobileNav — sticky mobile navigation bar + full-screen overlay menu.
+ * MobileNav — fixed mobile navigation bar + full-screen overlay menu.
  *
- * Rendered independently from the desktop Navigation so each can have
- * its own positioning strategy:
- *   Desktop nav  → absolute (overlays the hero image)
- *   Mobile nav   → fixed   (sticks while the page scrolls)
+ * BAR (closed): white frosted-glass card floating at the top of the screen.
+ *   — bg-white/80 + backdrop-blur-sm + rounded-[8px]
+ *   — Brand and hamburger are always dark (#313534) regardless of page or hero.
+ *   — Figma ref: node 219:2133
+ *
+ * OVERLAY (open): full-screen, adapts to page palette.
+ *   — Dark pages (/videobook, /contacto) + Home → dark overlay, cream links
+ *   — Light pages (/galeria, /conoceme)         → cream overlay, dark links
  *
  * Visibility:
- *   MobileNav   → visible only on < md  (flex md:hidden)
- *   Navigation  → visible only on md +  (hidden md:flex)
+ *   MobileNav  → flex md:hidden  (mobile only)
+ *   Navigation → hidden md:flex  (desktop only)
+ *
+ * Positioning:
+ *   Bar     → fixed (sticks on scroll)
+ *   Overlay → fixed inset-0 (full screen)
  */
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { useHeroColor } from "@/context/HeroColorContext";
 
 const menuLinks = [
-  { href: "/videobook", label: "Videobook"  },
-  { href: "/galeria",   label: "Galería"    },
-  { href: "/conoceme",  label: "Conóceme"   },
-  { href: "/contacto",  label: "Contacto"   },
+  { href: "/videobook", label: "Videobook" },
+  { href: "/galeria",   label: "Galería"   },
+  { href: "/conoceme",  label: "Conóceme"  },
+  { href: "/contacto",  label: "Contacto"  },
 ];
 
 const darkRoutes = ["/videobook", "/contacto"];
 
 export default function MobileNav() {
-  const pathname             = usePathname();
-  const { color: heroColor } = useHeroColor();
-  const [open, setOpen]      = useState(false);
+  const pathname    = usePathname();
+  const [open, setOpen] = useState(false);
 
   const isHome = pathname === "/";
   const isDark = darkRoutes.includes(pathname);
 
-  /* Bar colour: follows hero carousel on home, page palette on subpages */
-  const barColor  = isHome ? heroColor : isDark ? "#ece8df" : "#313534";
-
-  /* Overlay theme */
+  /* Overlay adapts to page palette */
   const overlayBg = isDark || isHome ? "bg-[#0d0d0d]/96" : "bg-[#ece8df]/96";
   const menuColor = isDark || isHome ? "#ece8df"          : "#313534";
 
   return (
     <>
-      {/* ── Sticky bar ─────────────────────────────────────────── */}
-      <div
-        className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center justify-between px-5 py-4"
-        style={{
-          /* Subtle bg so text is always legible over any page colour */
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 100%)",
-        }}
-      >
-        <Link
-          href="/"
-          onClick={() => setOpen(false)}
-          style={{ color: barColor, transition: "color 700ms ease" }}
-          className="font-display text-[24px] leading-none"
-        >
-          Florencia Romero
-        </Link>
+      {/* ── Fixed bar — white frosted-glass card ───────────────── */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex md:hidden px-4 pt-4">
+        <div className="w-full bg-white/80 backdrop-blur-sm rounded-[8px] flex items-center justify-between px-3 py-[10px]">
 
-        <button
-          onClick={() => setOpen(true)}
-          aria-label="Abrir menú"
-          style={{ color: barColor, transition: "color 700ms ease" }}
-          className="p-2 flex flex-col gap-[5px]"
-        >
-          <span className="block w-[22px] h-[1.5px] bg-current" />
-          <span className="block w-[22px] h-[1.5px] bg-current" />
-          <span className="block w-[22px] h-[1.5px] bg-current" />
-        </button>
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="font-display text-[24px] leading-none text-[#313534]"
+          >
+            Florencia Romero
+          </Link>
+
+          <button
+            onClick={() => setOpen(true)}
+            aria-label="Abrir menú"
+            className="p-1 flex flex-col gap-[5px]"
+          >
+            <span className="block w-[22px] h-[1.5px] bg-[#313534]" />
+            <span className="block w-[22px] h-[1.5px] bg-[#313534]" />
+            <span className="block w-[22px] h-[1.5px] bg-[#313534]" />
+          </button>
+
+        </div>
       </div>
 
       {/* ── Full-screen overlay ────────────────────────────────── */}
@@ -78,7 +77,7 @@ export default function MobileNav() {
         <div
           className={`fixed inset-0 z-[200] flex md:hidden flex-col items-center justify-center ${overlayBg} backdrop-blur-sm`}
         >
-          {/* Close */}
+          {/* Close button */}
           <button
             onClick={() => setOpen(false)}
             aria-label="Cerrar menú"
@@ -88,7 +87,7 @@ export default function MobileNav() {
             Cerrar ✕
           </button>
 
-          {/* Links */}
+          {/* Nav links */}
           <nav className="flex flex-col items-center gap-10">
             {menuLinks.map(({ href, label }) => {
               const isActive = pathname === href;
