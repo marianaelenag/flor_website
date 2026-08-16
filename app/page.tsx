@@ -23,7 +23,7 @@ export default function Home() {
   const [current, setCurrent] = useState(0);
   const { color: textColor, setColor } = useHeroColor();
 
-  const slides = heroData.slides as { bg: string; textColor: HeroColor; image?: string }[];
+  const slides = heroData.slides as { textColor: HeroColor; image?: string }[];
   const { quote, quoteAttribution } = heroData;
 
   /* Sync nav colour on first render */
@@ -55,11 +55,8 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden">
 
-      {/* ── Background: photo if set, otherwise colour swatch ── */}
-      <div
-        className="absolute inset-0 transition-colors duration-700"
-        style={{ backgroundColor: slide.bg }}
-      >
+      {/* ── Background photo ── */}
+      <div className="absolute inset-0">
         {slide.image && (
           <Image
             src={slide.image}
@@ -80,8 +77,12 @@ export default function Home() {
 
       {/* ── Hero text ── */}
       <div
-        className="absolute bottom-16 left-5 sm:bottom-[134px] sm:left-[124px]"
-        style={{ color: textColor, transition: COLOR_TRANSITION }}
+        className="absolute bottom-16 left-5 sm:bottom-[134px] sm:left-[124px] rounded-[8px]"
+        style={{
+          color: textColor,
+          transition: COLOR_TRANSITION,
+          boxShadow: "0 0 24px 24px #3E3128",
+        }}
       >
         {/* Name */}
         <p

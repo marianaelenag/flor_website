@@ -40,7 +40,10 @@ export default function Navigation() {
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 hidden md:flex justify-center">
-      <div className="flex items-center h-[48px] max-w-[935px] w-full mt-[80px] px-6">
+      <div
+        className="flex items-center h-[48px] max-w-[935px] w-full mt-[80px] px-6 rounded-[8px]"
+        style={{ boxShadow: "0 0 24px 24px #3E3128" }}
+      >
         {links.map(({ href, label, isBrand }) => {
           const isActive = pathname === href;
 
