@@ -77,12 +77,8 @@ export default function Home() {
 
       {/* ── Hero text ── */}
       <div
-        className="absolute bottom-16 left-5 sm:bottom-[134px] sm:left-[124px] rounded-[8px]"
-        style={{
-          color: textColor,
-          transition: COLOR_TRANSITION,
-          boxShadow: "0 0 24px 24px #3E3128",
-        }}
+        className="absolute bottom-16 left-5 sm:bottom-[134px] sm:left-[124px]"
+        style={{ color: textColor, transition: COLOR_TRANSITION }}
       >
         {/* Name */}
         <p
