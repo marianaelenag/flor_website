@@ -41,6 +41,9 @@ export default function Conoceme() {
     bio:         string;
   };
 
+  const formacionSection = cvSections.find((s) => s.title === "Formación");
+  const otherSections    = cvSections.filter((s) => s.title !== "Formación");
+
   return (
     <main className="min-h-screen bg-[#797c5c] pt-[90px] md:pt-[160px] pb-16">
 
@@ -86,25 +89,48 @@ export default function Conoceme() {
         ══════════════════════════════════════════════════════ */}
         <section className="bg-[#ece8df] rounded-[4px] p-6 md:p-10">
 
-          {/* Section grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
-            {cvSections.map((section, si) => (
-              <div key={si}>
+          {/* Three-box row: Teatro/Largometrajes/Cortometrajes | Formación (bleeds across two boxes) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8">
+
+            {/* ── Box 1 — Teatro, Largometrajes, Cortometrajes ── */}
+            <div className="flex flex-col gap-8">
+              {otherSections.map((section, si) => (
+                <div key={si}>
+                  <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                    {section.title}
+                  </h3>
+                  <ul className="flex flex-col gap-3">
+                    {section.items.map((item, ii) => (
+                      <li
+                        key={ii}
+                        className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
+                      >
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* ── Box 2 + Box 3 — Formación, flowing across both ── */}
+            {formacionSection && (
+              <div className="md:col-span-2">
                 <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
-                  {section.title}
+                  {formacionSection.title}
                 </h3>
-                <ul className="flex flex-col gap-3">
-                  {section.items.map((item, ii) => (
+                <ul className="columns-1 md:columns-2 gap-8">
+                  {formacionSection.items.map((item, ii) => (
                     <li
                       key={ii}
-                      className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
+                      className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line mb-3"
                     >
                       {item.text}
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
+            )}
           </div>
 
           {/* ── Idiomas — one-liner ── */}
