@@ -56,6 +56,15 @@ fragment ConocemeParts on Conoceme {
   bio
 }
 
+fragment SiteParts on Site {
+  __typename
+  socialLinks {
+    __typename
+    platform
+    url
+  }
+}
+
 fragment ContactoParts on Contacto {
   __typename
   backgroundSrc

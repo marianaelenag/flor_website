@@ -90,6 +90,8 @@ export type Query = {
   galeriaConnection: GaleriaConnection;
   conoceme: Conoceme;
   conocemeConnection: ConocemeConnection;
+  site: Site;
+  siteConnection: SiteConnection;
   contacto: Contacto;
   contactoConnection: ContactoConnection;
 };
@@ -176,6 +178,21 @@ export type QueryConocemeConnectionArgs = {
 };
 
 
+export type QuerySiteArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySiteConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteFilter>;
+};
+
+
 export type QueryContactoArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -195,6 +212,7 @@ export type DocumentFilter = {
   videobook?: InputMaybe<VideobookFilter>;
   galeria?: InputMaybe<GaleriaFilter>;
   conoceme?: InputMaybe<ConocemeFilter>;
+  site?: InputMaybe<SiteFilter>;
   contacto?: InputMaybe<ContactoFilter>;
 };
 
@@ -235,7 +253,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Hero | Videobook | Galeria | Conoceme | Contacto | Folder;
+export type DocumentNode = Hero | Videobook | Galeria | Conoceme | Site | Contacto | Folder;
 
 export type HeroSlides = {
   __typename?: 'HeroSlides';
@@ -448,6 +466,42 @@ export type ConocemeConnection = Connection & {
   edges?: Maybe<Array<Maybe<ConocemeConnectionEdges>>>;
 };
 
+export type SiteSocialLinks = {
+  __typename?: 'SiteSocialLinks';
+  platform?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type Site = Node & Document & {
+  __typename?: 'Site';
+  socialLinks?: Maybe<Array<Maybe<SiteSocialLinks>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type SiteSocialLinksFilter = {
+  platform?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type SiteFilter = {
+  socialLinks?: InputMaybe<SiteSocialLinksFilter>;
+};
+
+export type SiteConnectionEdges = {
+  __typename?: 'SiteConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Site>;
+};
+
+export type SiteConnection = Connection & {
+  __typename?: 'SiteConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<SiteConnectionEdges>>>;
+};
+
 export type Contacto = Node & Document & {
   __typename?: 'Contacto';
   backgroundSrc?: Maybe<Scalars['String']['output']>;
@@ -490,6 +544,8 @@ export type Mutation = {
   createGaleria: Galeria;
   updateConoceme: Conoceme;
   createConoceme: Conoceme;
+  updateSite: Site;
+  createSite: Site;
   updateContacto: Contacto;
   createContacto: Contacto;
 };
@@ -576,6 +632,18 @@ export type MutationCreateConocemeArgs = {
 };
 
 
+export type MutationUpdateSiteArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteMutation;
+};
+
+
+export type MutationCreateSiteArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteMutation;
+};
+
+
 export type MutationUpdateContactoArgs = {
   relativePath: Scalars['String']['input'];
   params: ContactoMutation;
@@ -592,6 +660,7 @@ export type DocumentUpdateMutation = {
   videobook?: InputMaybe<VideobookMutation>;
   galeria?: InputMaybe<GaleriaMutation>;
   conoceme?: InputMaybe<ConocemeMutation>;
+  site?: InputMaybe<SiteMutation>;
   contacto?: InputMaybe<ContactoMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -601,6 +670,7 @@ export type DocumentMutation = {
   videobook?: InputMaybe<VideobookMutation>;
   galeria?: InputMaybe<GaleriaMutation>;
   conoceme?: InputMaybe<ConocemeMutation>;
+  site?: InputMaybe<SiteMutation>;
   contacto?: InputMaybe<ContactoMutation>;
 };
 
@@ -665,6 +735,15 @@ export type ConocemeMutation = {
   bio?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SiteSocialLinksMutation = {
+  platform?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteMutation = {
+  socialLinks?: InputMaybe<Array<InputMaybe<SiteSocialLinksMutation>>>;
+};
+
 export type ContactoMutation = {
   backgroundSrc?: InputMaybe<Scalars['String']['input']>;
   backgroundAlt?: InputMaybe<Scalars['String']['input']>;
@@ -677,6 +756,8 @@ export type VideobookPartsFragment = { __typename: 'Videobook', featured?: { __t
 export type GaleriaPartsFragment = { __typename: 'Galeria', photos?: Array<{ __typename: 'GaleriaPhotos', src?: string | null, alt?: string | null } | null> | null };
 
 export type ConocemePartsFragment = { __typename: 'Conoceme', portraitSrc?: string | null, portraitAlt?: string | null, bioHeading?: string | null, bio?: string | null, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null };
+
+export type SitePartsFragment = { __typename: 'Site', socialLinks?: Array<{ __typename: 'SiteSocialLinks', platform?: string | null, url?: string | null } | null> | null };
 
 export type ContactoPartsFragment = { __typename: 'Contacto', backgroundSrc?: string | null, backgroundAlt?: string | null };
 
@@ -755,6 +836,25 @@ export type ConocemeConnectionQueryVariables = Exact<{
 
 
 export type ConocemeConnectionQuery = { __typename?: 'Query', conocemeConnection: { __typename?: 'ConocemeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ConocemeConnectionEdges', cursor: string, node?: { __typename: 'Conoceme', id: string, portraitSrc?: string | null, portraitAlt?: string | null, bioHeading?: string | null, bio?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null } | null } | null> | null } };
+
+export type SiteQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSocialLinks', platform?: string | null, url?: string | null } | null> | null } };
+
+export type SiteConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteFilter>;
+}>;
+
+
+export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSocialLinks', platform?: string | null, url?: string | null } | null> | null } | null } | null> | null } };
 
 export type ContactoQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -835,6 +935,16 @@ export const ConocemePartsFragmentDoc = gql`
   }
   bioHeading
   bio
+}
+    `;
+export const SitePartsFragmentDoc = gql`
+    fragment SiteParts on Site {
+  __typename
+  socialLinks {
+    __typename
+    platform
+    url
+  }
 }
     `;
 export const ContactoPartsFragmentDoc = gql`
@@ -1072,6 +1182,63 @@ export const ConocemeConnectionDocument = gql`
   }
 }
     ${ConocemePartsFragmentDoc}`;
+export const SiteDocument = gql`
+    query site($relativePath: String!) {
+  site(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SiteParts
+  }
+}
+    ${SitePartsFragmentDoc}`;
+export const SiteConnectionDocument = gql`
+    query siteConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SiteFilter) {
+  siteConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SiteParts
+      }
+    }
+  }
+}
+    ${SitePartsFragmentDoc}`;
 export const ContactoDocument = gql`
     query contacto($relativePath: String!) {
   contacto(relativePath: $relativePath) {
@@ -1155,6 +1322,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     conocemeConnection(variables?: ConocemeConnectionQueryVariables, options?: C): Promise<{data: ConocemeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ConocemeConnectionQueryVariables, query: string}> {
         return requester<{data: ConocemeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ConocemeConnectionQueryVariables, query: string}, ConocemeConnectionQueryVariables>(ConocemeConnectionDocument, variables, options);
+      },
+    site(variables: SiteQueryVariables, options?: C): Promise<{data: SiteQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteQueryVariables, query: string}> {
+        return requester<{data: SiteQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteQueryVariables, query: string}, SiteQueryVariables>(SiteDocument, variables, options);
+      },
+    siteConnection(variables?: SiteConnectionQueryVariables, options?: C): Promise<{data: SiteConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteConnectionQueryVariables, query: string}> {
+        return requester<{data: SiteConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteConnectionQueryVariables, query: string}, SiteConnectionQueryVariables>(SiteConnectionDocument, variables, options);
       },
     contacto(variables: ContactoQueryVariables, options?: C): Promise<{data: ContactoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactoQueryVariables, query: string}> {
         return requester<{data: ContactoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactoQueryVariables, query: string}, ContactoQueryVariables>(ContactoDocument, variables, options);

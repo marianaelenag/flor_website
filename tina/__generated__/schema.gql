@@ -62,6 +62,8 @@ type Query {
   galeriaConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GaleriaFilter): GaleriaConnection!
   conoceme(relativePath: String): Conoceme!
   conocemeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ConocemeFilter): ConocemeConnection!
+  site(relativePath: String): Site!
+  siteConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteFilter): SiteConnection!
   contacto(relativePath: String): Contacto!
   contactoConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactoFilter): ContactoConnection!
 }
@@ -71,6 +73,7 @@ input DocumentFilter {
   videobook: VideobookFilter
   galeria: GaleriaFilter
   conoceme: ConocemeFilter
+  site: SiteFilter
   contacto: ContactoFilter
 }
 
@@ -97,7 +100,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Hero | Videobook | Galeria | Conoceme | Contacto | Folder
+union DocumentNode = Hero | Videobook | Galeria | Conoceme | Site | Contacto | Folder
 
 type HeroSlides {
   bg: String
@@ -291,6 +294,38 @@ type ConocemeConnection implements Connection {
   edges: [ConocemeConnectionEdges]
 }
 
+type SiteSocialLinks {
+  platform: String
+  url: String
+}
+
+type Site implements Node & Document {
+  socialLinks: [SiteSocialLinks]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SiteSocialLinksFilter {
+  platform: StringFilter
+  url: StringFilter
+}
+
+input SiteFilter {
+  socialLinks: SiteSocialLinksFilter
+}
+
+type SiteConnectionEdges {
+  cursor: String!
+  node: Site
+}
+
+type SiteConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SiteConnectionEdges]
+}
+
 type Contacto implements Node & Document {
   backgroundSrc: String
   backgroundAlt: String
@@ -329,6 +364,8 @@ type Mutation {
   createGaleria(relativePath: String!, params: GaleriaMutation!): Galeria!
   updateConoceme(relativePath: String!, params: ConocemeMutation!): Conoceme!
   createConoceme(relativePath: String!, params: ConocemeMutation!): Conoceme!
+  updateSite(relativePath: String!, params: SiteMutation!): Site!
+  createSite(relativePath: String!, params: SiteMutation!): Site!
   updateContacto(relativePath: String!, params: ContactoMutation!): Contacto!
   createContacto(relativePath: String!, params: ContactoMutation!): Contacto!
 }
@@ -338,6 +375,7 @@ input DocumentUpdateMutation {
   videobook: VideobookMutation
   galeria: GaleriaMutation
   conoceme: ConocemeMutation
+  site: SiteMutation
   contacto: ContactoMutation
   relativePath: String
 }
@@ -347,6 +385,7 @@ input DocumentMutation {
   videobook: VideobookMutation
   galeria: GaleriaMutation
   conoceme: ConocemeMutation
+  site: SiteMutation
   contacto: ContactoMutation
 }
 
@@ -409,6 +448,15 @@ input ConocemeMutation {
   idiomas: ConocemeIdiomasMutation
   bioHeading: String
   bio: String
+}
+
+input SiteSocialLinksMutation {
+  platform: String
+  url: String
+}
+
+input SiteMutation {
+  socialLinks: [SiteSocialLinksMutation]
 }
 
 input ContactoMutation {
