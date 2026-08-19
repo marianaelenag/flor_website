@@ -39,6 +39,8 @@ fragment ConocemeParts on Conoceme {
   __typename
   portraitSrc
   portraitAlt
+  cvHeading
+  cvFileSrc
   cvSections {
     __typename
     title

@@ -1,6 +1,8 @@
 {
   "portraitSrc": "/uploads/Conoceme_foto.JPG",
   "portraitAlt": "Florencia Romero",
+  "cvHeading": "Curriculum",
+  "cvFileSrc": "",
   "cvSections": [
     {
       "title": "Teatro",

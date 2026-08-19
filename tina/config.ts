@@ -171,6 +171,22 @@ export default defineConfig({
             label: "Alt text de la foto",
           },
 
+          /* ── CV box heading + downloadable file ── */
+          {
+            type: "string",
+            name: "cvHeading",
+            label: "Título de la sección CV (ej: Curriculum)",
+          },
+          {
+            type: "image",
+            name: "cvFileSrc",
+            label: "Archivo del CV (PDF)",
+            ui: {
+              description:
+                "Sube el PDF del currículum. Se usa como enlace del botón de descarga junto al título.",
+            },
+          },
+
           /* ── CV sections (Teatro, Formación, etc.) ── */
           {
             type: "object",

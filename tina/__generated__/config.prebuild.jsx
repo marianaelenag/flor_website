@@ -159,6 +159,20 @@ var config_default = defineConfig({
             name: "portraitAlt",
             label: "Alt text de la foto"
           },
+          /* ── CV box heading + downloadable file ── */
+          {
+            type: "string",
+            name: "cvHeading",
+            label: "T\xEDtulo de la secci\xF3n CV (ej: Curriculum)"
+          },
+          {
+            type: "image",
+            name: "cvFileSrc",
+            label: "Archivo del CV (PDF)",
+            ui: {
+              description: "Sube el PDF del curr\xEDculum. Se usa como enlace del bot\xF3n de descarga junto al t\xEDtulo."
+            }
+          },
           /* ── CV sections (Teatro, Formación, etc.) ── */
           {
             type: "object",

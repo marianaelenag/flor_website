@@ -421,6 +421,8 @@ export type Conoceme = Node & Document & {
   __typename?: 'Conoceme';
   portraitSrc?: Maybe<Scalars['String']['output']>;
   portraitAlt?: Maybe<Scalars['String']['output']>;
+  cvHeading?: Maybe<Scalars['String']['output']>;
+  cvFileSrc?: Maybe<Scalars['String']['output']>;
   cvSections?: Maybe<Array<Maybe<ConocemeCvSections>>>;
   idiomas?: Maybe<ConocemeIdiomas>;
   bioHeading?: Maybe<Scalars['String']['output']>;
@@ -447,6 +449,8 @@ export type ConocemeIdiomasFilter = {
 export type ConocemeFilter = {
   portraitSrc?: InputMaybe<ImageFilter>;
   portraitAlt?: InputMaybe<StringFilter>;
+  cvHeading?: InputMaybe<StringFilter>;
+  cvFileSrc?: InputMaybe<ImageFilter>;
   cvSections?: InputMaybe<ConocemeCvSectionsFilter>;
   idiomas?: InputMaybe<ConocemeIdiomasFilter>;
   bioHeading?: InputMaybe<StringFilter>;
@@ -729,6 +733,8 @@ export type ConocemeIdiomasMutation = {
 export type ConocemeMutation = {
   portraitSrc?: InputMaybe<Scalars['String']['input']>;
   portraitAlt?: InputMaybe<Scalars['String']['input']>;
+  cvHeading?: InputMaybe<Scalars['String']['input']>;
+  cvFileSrc?: InputMaybe<Scalars['String']['input']>;
   cvSections?: InputMaybe<Array<InputMaybe<ConocemeCvSectionsMutation>>>;
   idiomas?: InputMaybe<ConocemeIdiomasMutation>;
   bioHeading?: InputMaybe<Scalars['String']['input']>;
@@ -755,7 +761,7 @@ export type VideobookPartsFragment = { __typename: 'Videobook', featured?: { __t
 
 export type GaleriaPartsFragment = { __typename: 'Galeria', photos?: Array<{ __typename: 'GaleriaPhotos', src?: string | null, alt?: string | null } | null> | null };
 
-export type ConocemePartsFragment = { __typename: 'Conoceme', portraitSrc?: string | null, portraitAlt?: string | null, bioHeading?: string | null, bio?: string | null, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null };
+export type ConocemePartsFragment = { __typename: 'Conoceme', portraitSrc?: string | null, portraitAlt?: string | null, cvHeading?: string | null, cvFileSrc?: string | null, bioHeading?: string | null, bio?: string | null, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null };
 
 export type SitePartsFragment = { __typename: 'Site', socialLinks?: Array<{ __typename: 'SiteSocialLinks', platform?: string | null, url?: string | null } | null> | null };
 
@@ -823,7 +829,7 @@ export type ConocemeQueryVariables = Exact<{
 }>;
 
 
-export type ConocemeQuery = { __typename?: 'Query', conoceme: { __typename: 'Conoceme', id: string, portraitSrc?: string | null, portraitAlt?: string | null, bioHeading?: string | null, bio?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null } };
+export type ConocemeQuery = { __typename?: 'Query', conoceme: { __typename: 'Conoceme', id: string, portraitSrc?: string | null, portraitAlt?: string | null, cvHeading?: string | null, cvFileSrc?: string | null, bioHeading?: string | null, bio?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null } };
 
 export type ConocemeConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -835,7 +841,7 @@ export type ConocemeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ConocemeConnectionQuery = { __typename?: 'Query', conocemeConnection: { __typename?: 'ConocemeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ConocemeConnectionEdges', cursor: string, node?: { __typename: 'Conoceme', id: string, portraitSrc?: string | null, portraitAlt?: string | null, bioHeading?: string | null, bio?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null } | null } | null> | null } };
+export type ConocemeConnectionQuery = { __typename?: 'Query', conocemeConnection: { __typename?: 'ConocemeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ConocemeConnectionEdges', cursor: string, node?: { __typename: 'Conoceme', id: string, portraitSrc?: string | null, portraitAlt?: string | null, cvHeading?: string | null, cvFileSrc?: string | null, bioHeading?: string | null, bio?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cvSections?: Array<{ __typename: 'ConocemeCvSections', title?: string | null, items?: Array<{ __typename: 'ConocemeCvSectionsItems', text?: string | null } | null> | null } | null> | null, idiomas?: { __typename: 'ConocemeIdiomas', title?: string | null, items?: Array<string | null> | null } | null } | null } | null> | null } };
 
 export type SiteQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -920,6 +926,8 @@ export const ConocemePartsFragmentDoc = gql`
   __typename
   portraitSrc
   portraitAlt
+  cvHeading
+  cvFileSrc
   cvSections {
     __typename
     title

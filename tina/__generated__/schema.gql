@@ -251,6 +251,8 @@ type ConocemeIdiomas {
 type Conoceme implements Node & Document {
   portraitSrc: String
   portraitAlt: String
+  cvHeading: String
+  cvFileSrc: String
   cvSections: [ConocemeCvSections]
   idiomas: ConocemeIdiomas
   bioHeading: String
@@ -277,6 +279,8 @@ input ConocemeIdiomasFilter {
 input ConocemeFilter {
   portraitSrc: ImageFilter
   portraitAlt: StringFilter
+  cvHeading: StringFilter
+  cvFileSrc: ImageFilter
   cvSections: ConocemeCvSectionsFilter
   idiomas: ConocemeIdiomasFilter
   bioHeading: StringFilter
@@ -444,6 +448,8 @@ input ConocemeIdiomasMutation {
 input ConocemeMutation {
   portraitSrc: String
   portraitAlt: String
+  cvHeading: String
+  cvFileSrc: String
   cvSections: [ConocemeCvSectionsMutation]
   idiomas: ConocemeIdiomasMutation
   bioHeading: String

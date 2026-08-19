@@ -8,7 +8,8 @@
  *   Right : bio heading + bio text (single column), 70% width
  *
  * BOX 2 (lower) — cream card
- *   CV sections grid + Idiomas one-liner
+ *   Heading ("Curriculum") + CV download button
+ *   3-col grid: Teatro | Largometrajes+Cortometrajes+Idiomas | Formación
  *
  * Mobile: photo stacks on top, bio 1-col, CV sections 1-col.
  *
@@ -28,6 +29,8 @@ export default function Conoceme() {
   const {
     portraitSrc,
     portraitAlt,
+    cvHeading,
+    cvFileSrc,
     cvSections,
     idiomas,
     bioHeading,
@@ -35,6 +38,8 @@ export default function Conoceme() {
   } = conocemeData as {
     portraitSrc: string;
     portraitAlt: string;
+    cvHeading:   string;
+    cvFileSrc:   string;
     cvSections:  CvSection[];
     idiomas:     Idiomas;
     bioHeading:  string;
@@ -91,11 +96,37 @@ export default function Conoceme() {
         ══════════════════════════════════════════════════════ */}
         <section className="bg-[#ece8df] rounded-[4px] p-6 md:p-10">
 
-          {/* 3x3 grid — Row 1: Teatro | Formación (bleeds across cols 2-3)
-                        Row 2: Largometrajes | Cortometrajes | Idiomas */}
+          {/* ── Heading + CV download button ── */}
+          <div className="flex items-center gap-4 mb-8">
+            <h2 className="font-display text-[22px] md:text-[28px] text-[#313534] uppercase">
+              {cvHeading}
+            </h2>
+            {cvFileSrc && (
+              <a
+                href={cvFileSrc}
+                download
+                aria-label="Descargar CV"
+                className="flex-shrink-0 opacity-80 hover:opacity-100 transition-opacity"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24"
+                  width="24"
+                  viewBox="0 -960 960 960"
+                  fill="#797c5c"
+                >
+                  <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
+                </svg>
+              </a>
+            )}
+          </div>
+
+          {/* 3-column grid — Col 1: Teatro
+                              Col 2: Largometrajes + Cortometrajes + Idiomas
+                              Col 3: Formación */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            {/* ── Row 1, Col 1 — Teatro ── */}
+            {/* ── Col 1 — Teatro ── */}
             {teatroSection && (
               <div>
                 <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
@@ -114,76 +145,76 @@ export default function Conoceme() {
               </div>
             )}
 
-            {/* ── Row 1, Col 2-3 — Formación, flowing across both ── */}
+            {/* ── Col 2 — Largometrajes, Cortometrajes, Idiomas stacked ── */}
+            <div className="flex flex-col gap-8">
+              {largometrajesSection && (
+                <div>
+                  <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                    {largometrajesSection.title}
+                  </h3>
+                  <ul className="flex flex-col gap-3">
+                    {largometrajesSection.items.map((item, ii) => (
+                      <li
+                        key={ii}
+                        className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
+                      >
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {cortometrajesSection && (
+                <div>
+                  <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                    {cortometrajesSection.title}
+                  </h3>
+                  <ul className="flex flex-col gap-3">
+                    {cortometrajesSection.items.map((item, ii) => (
+                      <li
+                        key={ii}
+                        className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
+                      >
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {idiomas?.items?.length > 0 && (
+                <div>
+                  <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                    {idiomas.title}
+                  </h3>
+                  <ul className="flex flex-row flex-wrap gap-x-2 gap-y-1">
+                    {idiomas.items.map((lang, li) => (
+                      <li
+                        key={li}
+                        className="font-body font-medium text-[14px] text-[#313534] leading-snug after:content-['•'] after:ml-2 after:text-[#313534]/40 last:after:content-none"
+                      >
+                        {lang}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* ── Col 3 — Formación ── */}
             {formacionSection && (
-              <div className="md:col-span-2">
+              <div>
                 <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
                   {formacionSection.title}
                 </h3>
-                <ul className="columns-1 md:columns-2 gap-8">
+                <ul className="flex flex-col gap-3">
                   {formacionSection.items.map((item, ii) => (
                     <li
                       key={ii}
-                      className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line mb-3"
-                    >
-                      {item.text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* ── Row 2, Col 1 — Largometrajes ── */}
-            {largometrajesSection && (
-              <div>
-                <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
-                  {largometrajesSection.title}
-                </h3>
-                <ul className="flex flex-col gap-3">
-                  {largometrajesSection.items.map((item, ii) => (
-                    <li
-                      key={ii}
                       className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
                     >
                       {item.text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* ── Row 2, Col 2 — Cortometrajes ── */}
-            {cortometrajesSection && (
-              <div>
-                <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
-                  {cortometrajesSection.title}
-                </h3>
-                <ul className="flex flex-col gap-3">
-                  {cortometrajesSection.items.map((item, ii) => (
-                    <li
-                      key={ii}
-                      className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
-                    >
-                      {item.text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* ── Row 2, Col 3 — Idiomas ── */}
-            {idiomas?.items?.length > 0 && (
-              <div>
-                <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
-                  {idiomas.title}
-                </h3>
-                <ul className="flex flex-col gap-3">
-                  {idiomas.items.map((lang, li) => (
-                    <li
-                      key={li}
-                      className="font-body font-medium text-[14px] text-[#313534] leading-snug"
-                    >
-                      {lang}
                     </li>
                   ))}
                 </ul>
