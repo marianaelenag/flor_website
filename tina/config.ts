@@ -255,6 +255,42 @@ export default defineConfig({
         ],
       },
 
+      /* ─────────────────────── SITIO (redes sociales) ──────── */
+      {
+        name: "site",
+        label: "Sitio",
+        path: "content/site",
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          {
+            type: "object",
+            name: "socialLinks",
+            label: "Redes sociales",
+            list: true,
+            ui: {
+              itemProps: (item: Record<string, unknown>) => ({
+                label: (item?.platform as string) ?? "Red social",
+              }),
+              description:
+                "Estos links aparecen en el footer, en el orden en que los agregues.",
+            },
+            fields: [
+              {
+                type: "string",
+                name: "platform",
+                label: "Plataforma (texto a mostrar, ej: Instagram)",
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "URL del perfil",
+              },
+            ],
+          },
+        ],
+      },
+
       /* ─────────────────────── CONTACTO ────────────────────── */
       {
         name: "contacto",
