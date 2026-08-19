@@ -70,7 +70,7 @@ export default function Home() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(4,6,5,0.88) 0%, rgba(10,6,4,0.55) 10%, transparent 70%)",
+              "linear-gradient(to bottom, rgba(4,6,5,0.88) 0%, rgba(10,6,4,0.55) 8%, transparent 70%)",
           }}
         />
       </div>
