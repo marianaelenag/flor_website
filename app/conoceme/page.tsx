@@ -3,12 +3,12 @@
  *
  * Two-box layout:
  *
- * BOX 1 — olive green background card
+ * BOX 1 (upper) — cream card
+ *   Heading + bio text split into two CSS columns (browser handles reflow)
+ *
+ * BOX 2 (lower) — olive green background card
  *   Left  : portrait photo, top-right anchored, fixed width
  *   Right : cream panel with CV sections grid + Idiomas one-liner
- *
- * BOX 2 — cream card
- *   Heading + bio text split into two CSS columns (browser handles reflow)
  *
  * Mobile: photo stacks on top, CV sections 1-col, bio 1-col.
  *
@@ -47,7 +47,33 @@ export default function Conoceme() {
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-col gap-6">
 
         {/* ══════════════════════════════════════════════════════
-            BOX 1 — Portrait + CV sections
+            BOX 1 (upper) — Bio (two CSS columns on desktop)
+        ══════════════════════════════════════════════════════ */}
+        <section className="bg-[#ece8df] rounded-[4px] p-6 md:p-12 lg:p-16">
+
+          <h2 className="font-display text-[22px] md:text-[28px] text-[#313534] uppercase mb-8">
+            {bioHeading}
+          </h2>
+
+          <div
+            className="font-body text-[13px] md:text-[14px] text-[#313534] leading-relaxed"
+            style={{
+              /* Two columns on md+, single column on mobile */
+              columnCount: undefined,
+            }}
+          >
+            {/* CSS columns via Tailwind: columns-1 md:columns-2 */}
+            <p
+              className="columns-1 md:columns-2 gap-10 whitespace-pre-line"
+            >
+              {bio}
+            </p>
+          </div>
+
+        </section>
+
+        {/* ══════════════════════════════════════════════════════
+            BOX 2 (lower) — Portrait + CV sections
         ══════════════════════════════════════════════════════ */}
         <section className="flex flex-col md:flex-row overflow-hidden rounded-[4px]">
 
@@ -108,32 +134,6 @@ export default function Conoceme() {
               </div>
             )}
           </div>
-        </section>
-
-        {/* ══════════════════════════════════════════════════════
-            BOX 2 — Bio (two CSS columns on desktop)
-        ══════════════════════════════════════════════════════ */}
-        <section className="bg-[#ece8df] rounded-[4px] p-6 md:p-12 lg:p-16">
-
-          <h2 className="font-display text-[22px] md:text-[28px] text-[#313534] uppercase mb-8">
-            {bioHeading}
-          </h2>
-
-          <div
-            className="font-body text-[13px] md:text-[14px] text-[#313534] leading-relaxed"
-            style={{
-              /* Two columns on md+, single column on mobile */
-              columnCount: undefined,
-            }}
-          >
-            {/* CSS columns via Tailwind: columns-1 md:columns-2 */}
-            <p
-              className="columns-1 md:columns-2 gap-10 whitespace-pre-line"
-            >
-              {bio}
-            </p>
-          </div>
-
         </section>
 
       </div>

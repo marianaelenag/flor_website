@@ -8,8 +8,8 @@
  *
  * Colour logic:
  *   Homepage   → heroColor from carousel context, fades on slide change
- *   Dark pages (/videobook, /contacto) → satin-linen (#ece8df)
- *   Light pages (/galeria, /conoceme)  → cape-cod (#313534)
+ *   Dark pages (/videobook, /contacto, /conoceme) → satin-linen (#ece8df)
+ *   Light pages (/galeria)                        → cape-cod (#313534)
  */
 
 import Link from "next/link";
@@ -24,7 +24,7 @@ const links = [
   { href: "/contacto",  label: "Contacto"          },
 ];
 
-const darkRoutes = ["/videobook", "/contacto"];
+const darkRoutes = ["/videobook", "/contacto", "/conoceme"];
 
 export default function Navigation() {
   const pathname             = usePathname();
