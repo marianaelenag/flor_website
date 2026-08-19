@@ -41,8 +41,10 @@ export default function Conoceme() {
     bio:         string;
   };
 
-  const formacionSection = cvSections.find((s) => s.title === "Formación");
-  const otherSections    = cvSections.filter((s) => s.title !== "Formación");
+  const teatroSection         = cvSections.find((s) => s.title === "Teatro");
+  const largometrajesSection  = cvSections.find((s) => s.title === "Largometrajes");
+  const cortometrajesSection  = cvSections.find((s) => s.title === "Cortometrajes");
+  const formacionSection      = cvSections.find((s) => s.title === "Formación");
 
   return (
     <main className="min-h-screen bg-[#797c5c] pt-[90px] md:pt-[160px] pb-16">
@@ -89,31 +91,30 @@ export default function Conoceme() {
         ══════════════════════════════════════════════════════ */}
         <section className="bg-[#ece8df] rounded-[4px] p-6 md:p-10">
 
-          {/* Three-box row: Teatro/Largometrajes/Cortometrajes | Formación (bleeds across two boxes) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8">
+          {/* 3x3 grid — Row 1: Teatro | Formación (bleeds across cols 2-3)
+                        Row 2: Largometrajes | Cortometrajes | Idiomas */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            {/* ── Box 1 — Teatro, Largometrajes, Cortometrajes ── */}
-            <div className="flex flex-col gap-8">
-              {otherSections.map((section, si) => (
-                <div key={si}>
-                  <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
-                    {section.title}
-                  </h3>
-                  <ul className="flex flex-col gap-3">
-                    {section.items.map((item, ii) => (
-                      <li
-                        key={ii}
-                        className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
-                      >
-                        {item.text}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+            {/* ── Row 1, Col 1 — Teatro ── */}
+            {teatroSection && (
+              <div>
+                <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                  {teatroSection.title}
+                </h3>
+                <ul className="flex flex-col gap-3">
+                  {teatroSection.items.map((item, ii) => (
+                    <li
+                      key={ii}
+                      className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
+                    >
+                      {item.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            {/* ── Box 2 + Box 3 — Formación, flowing across both ── */}
+            {/* ── Row 1, Col 2-3 — Formación, flowing across both ── */}
             {formacionSection && (
               <div className="md:col-span-2">
                 <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
@@ -131,24 +132,64 @@ export default function Conoceme() {
                 </ul>
               </div>
             )}
-          </div>
 
-          {/* ── Idiomas — one-liner ── */}
-          {idiomas?.items?.length > 0 && (
-            <div className="mt-8 pt-5 border-t border-[#313534]/15 flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mr-2">
-                {idiomas.title}
-              </span>
-              {idiomas.items.map((lang, li) => (
-                <span key={li} className="font-body text-[12px] text-[#313534]">
-                  {lang}
-                  {li < idiomas.items.length - 1 && (
-                    <span className="ml-2 text-[#313534]/30">·</span>
-                  )}
-                </span>
-              ))}
-            </div>
-          )}
+            {/* ── Row 2, Col 1 — Largometrajes ── */}
+            {largometrajesSection && (
+              <div>
+                <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                  {largometrajesSection.title}
+                </h3>
+                <ul className="flex flex-col gap-3">
+                  {largometrajesSection.items.map((item, ii) => (
+                    <li
+                      key={ii}
+                      className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
+                    >
+                      {item.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* ── Row 2, Col 2 — Cortometrajes ── */}
+            {cortometrajesSection && (
+              <div>
+                <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                  {cortometrajesSection.title}
+                </h3>
+                <ul className="flex flex-col gap-3">
+                  {cortometrajesSection.items.map((item, ii) => (
+                    <li
+                      key={ii}
+                      className="font-body font-medium text-[14px] text-[#313534] leading-snug whitespace-pre-line"
+                    >
+                      {item.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* ── Row 2, Col 3 — Idiomas ── */}
+            {idiomas?.items?.length > 0 && (
+              <div>
+                <h3 className="font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#313534]/50 mb-3">
+                  {idiomas.title}
+                </h3>
+                <ul className="flex flex-col gap-3">
+                  {idiomas.items.map((lang, li) => (
+                    <li
+                      key={li}
+                      className="font-body font-medium text-[14px] text-[#313534] leading-snug"
+                    >
+                      {lang}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </section>
 
       </div>
