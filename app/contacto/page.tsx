@@ -33,7 +33,7 @@ const labelBase =
 export default function Contacto() {
   const { backgroundSrc, backgroundAlt } = contactoData;
   const [form, setForm]     = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -44,9 +44,22 @@ export default function Contacto() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("sending");
-    // TODO: replace with Resend / Formspree call
-    await new Promise((r) => setTimeout(r, 800));
-    setStatus("sent");
+
+    try {
+      const res = await fetch(
+        `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`,
+        {
+          method: "POST",
+          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
+
+      if (!res.ok) throw new Error("Formspree submission failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -137,6 +150,11 @@ export default function Contacto() {
                   >
                     {status === "sending" ? "Enviando…" : "Send message"}
                   </button>
+                  {status === "error" && (
+                    <p className="font-body text-[13px] text-red-400 mt-3">
+                      Algo salió mal, inténtalo de nuevo.
+                    </p>
+                  )}
                 </div>
 
               </form>
