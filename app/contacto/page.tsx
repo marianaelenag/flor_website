@@ -46,16 +46,13 @@ export default function Contacto() {
     setStatus("sending");
 
     try {
-      const res = await fetch(
-        `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`,
-        {
-          method: "POST",
-          headers: { Accept: "application/json", "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        }
-      );
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-      if (!res.ok) throw new Error("Formspree submission failed");
+      if (!res.ok) throw new Error("Contact submission failed");
       setStatus("sent");
     } catch {
       setStatus("error");
